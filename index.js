@@ -1,18 +1,5 @@
-# vue_apprentissage
-
-Installer vue CLI : `sudo npm install -g @vue/cli`
-Créer un projet : `vue create my-project`
-Lancer le projet : `npm run serve`
-
-## Exemple : Une nav
-
-<img src="./images/nav.png" />
-
-Le fichier index.js
-
-```js
 // La navigation
-var nav = new Vue({ // Instance de vue
+var nav = new Vue({
     // Sélecteur
     el: '#nav',
     // Définir les propriétés et leurs donner des valeurs.
@@ -21,7 +8,7 @@ var nav = new Vue({ // Instance de vue
         message: 'prout'
     },
 
-    // Functions we will be using.
+    // Fonction que nous allons utiliser
     methods: {
         rendreActif: function(item){
             // Quand le modèle à changé il est mis à jour automatiquement.
@@ -29,48 +16,9 @@ var nav = new Vue({ // Instance de vue
         }
     }
 });
-// Je change le contenu de mon message
+
 nav.message =  'prout2'
-```
 
-Le fichier HTML
-
-```html
-    <!-- La navigation -->
-    <div id="nav">
-        <!-- La navigation a la classe active -->
-        <!-- Pour empêcher la page de sauter lorsqu'un lien est cliqué 
-            nous utilisons le modificateur "prevent" -->
-        <nav v-bind:class="active" v-on:click.prevent>
-            <!-- Au clique on appelle la métode rendreActif  -->
-            <a href="#" class="home" v-on:click="rendreActif('home')">Accueil</a>
-            <a href="#" class="projets" v-on:click="rendreActif('projets')">Projets</a>
-            <a href="#" class="services" v-on:click="rendreActif('services')">Services</a>
-            <a href="#" class="contact" v-on:click="rendreActif('contact')">Contact</a>
-        </nav>
-    
-        <!-- The mustache expression will be replaced with the value of "active".
-                It will automatically update to reflect any changes. -->
-        <p>You chose <b>{{active}}</b></p>
-        {{ message }}
-    </div>
-```
-
-**el:** Le sélecteur
-**data:** Quand une instance de Vue est créée, cela ajoute toutes les propriétés trouvées dans son objet data au système réactif de Vue. Reagerdez dans data j'ai un objet message. Pour le changer je peux écrire `nav.message = 'Le nouveau message'`
-
-**props:** passer des données aux composants enfants. Comme le titre ou le contenu à afficher par exemple. 
-
-## Une nav
-
-
-## Un formulaire de recherche
-
-Normalement il faudrait le faire en Ajax mais pour commencer nous le faisons avec un tableau d'objets.
-
-Le fichier js
-
-```js
 //  Formulaire de recherche
 var recherche = new Vue({
     el: '#recherche',
@@ -133,24 +81,3 @@ var recherche = new Vue({
         }
     }
 });
-
-```
-
-Le fichier html
-
-```html
-<form id="recherche" v-cloak>
-    <div class="bar">
-        <!-- Create a binding between the searchString model and the text field -->
-        <input type="text" v-model="lettreTapee" placeholder="Faites votre recherche" />
-    </div>
-
-    <ul>        
-        <li v-for="article in filteredArticles">
-            <a v-bind:href="article.url"><img v-bind:src="article.image" /></a>
-            <p>{{article.title}}</p>
-        </li>
-    </ul>
-
-</form>
-```
