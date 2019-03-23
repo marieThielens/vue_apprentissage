@@ -1,14 +1,23 @@
 # vue_apprentissage
 
-Installer vue CLI : `sudo npm install -g @vue/cli`
-Créer un projet : `vue create my-project`
-Lancer le projet : `npm run serve`
+## Pour commencer
+
+Installer vue CLI : <span style="color:green;">sudo npm install -g @vue/cli</span> 
+Créer un projet : <span style="color:green;">vue create my-project</span> 
+Lancer le projet : <span style="color:green;">npm run serve</span> 
+
+## Installer un serveur web
+
+-   Il faut avoir le package npm. Vérifiez que vous l’avez : <span style="color:green;">npm —version</span> 
+- Installez le fichier package.json ( La carte d’identité de l’application) <span style="color:green;">npm init -y</span>  . On en a besoin pour pouvoir installer notre serveur.
+- Installer notre serveur : <span style="color:green;">npm install lite-server</span> (lite server est le nom de notre serveur).
+- Une bonne pratique est dans le fichier package.json rajouter "<span style="color:green;">start": "lite-server".</span> Comme ça pour le lancer on a plus qu’à taper <span style="color:green;">npm start</span> dans la console pour lancer le serveur.
 
 ## Exemple : Une nav
 
-<img src="./images/nav.png" />
+<img src="./images/nav.png" style="width:40%;" />
 
-Le fichier index.js
+### Le fichier index.js
 
 ```js
 // La navigation
@@ -33,7 +42,7 @@ var nav = new Vue({ // Instance de vue
 nav.message =  'prout2'
 ```
 
-Le fichier HTML
+### Le fichier HTML
 
 ```html
     <!-- La navigation -->
@@ -135,7 +144,6 @@ var recherche = new Vue({
 });
 
 ```
-
 Le fichier html
 
 ```html
@@ -153,4 +161,62 @@ Le fichier html
     </ul>
 
 </form>
+```
+
+## Components
+
+**Fichier html**
+```html
+<div id="footer">
+    <footer-marie></footer-marie>
+</div>
+```
+
+**Fichier js** 
+```js
+Vue.component('footer-marie', {
+    template: '<footer>Ceci est le pied de page</footer>'
+});
+
+var monFooter = new Vue({
+    el:'#footer'
+})
+```
+
+## Props
+
+**Fichier HTML**
+
+```html
+<div id="footer">
+    <ol>
+        <!--
+        Maintenant nous fournissons à chaque "element" l'objet reseau              -->
+        <footer-marie
+        v-for="element in reseauSociaux"
+        v-bind:reseau="element"
+        v-bind:key="element.id"
+        ></footer-marie>
+    </ol>
+</div>
+```
+
+**Fichier js**
+
+```js
+Vue.component('footer-marie', {
+    props: ['reseau'],
+    template: '<li>{{ reseau.text }}</li>'
+  })
+  
+  var footer = new Vue({
+    el: '#footer',
+    data: {
+      reseauSociaux: [
+        { id: 0, text: 'Linkedin' },
+        { id: 1, text: 'Facebook' },
+        { id: 2, text: 'Twitter' }
+      ]
+    }
+  })
 ```
