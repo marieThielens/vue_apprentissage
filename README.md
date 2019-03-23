@@ -2,16 +2,16 @@
 
 ## Pour commencer
 
-Installer vue CLI : <span style="color:green;">sudo npm install -g @vue/cli</span> 
-Créer un projet : <span style="color:green;">vue create my-project</span> 
-Lancer le projet : <span style="color:green;">npm run serve</span> 
+Installer vue CLI : **sudo npm install -g @vue/cli**
+Créer un projet : **vue create my-project**
+Lancer le projet : **npm run serve**
 
 ## Installer un serveur web
 
--   Il faut avoir le package npm. Vérifiez que vous l’avez : <span style="color:green;">npm —version</span> 
-- Installez le fichier package.json ( La carte d’identité de l’application) <span style="color:green;">npm init -y</span>  . On en a besoin pour pouvoir installer notre serveur.
-- Installer notre serveur : <span style="color:green;">npm install lite-server</span> (lite server est le nom de notre serveur).
-- Une bonne pratique est dans le fichier package.json rajouter "<span style="color:green;">start": "lite-server".</span> Comme ça pour le lancer on a plus qu’à taper <span style="color:green;">npm start</span> dans la console pour lancer le serveur.
+- Il faut avoir le package npm. Vérifiez que vous l’avez : **npm —version**
+- Installez le fichier package.json ( La carte d’identité de l’application) **npm init -y**  . On en a besoin pour pouvoir installer notre serveur.
+- Installer notre serveur : **npm install lite-server** (lite server est le nom de notre serveur).
+- Une bonne pratique est dans le fichier package.json rajouter **"start": "lite-server".** Comme ça pour le lancer on a plus qu’à taper **npm start** dans la console pour lancer le serveur.
 
 ## Exemple : Une nav
 
@@ -185,21 +185,7 @@ var monFooter = new Vue({
 
 ## Props
 
-**Fichier HTML**
-
-```html
-<div id="footer">
-    <ol>
-        <!--
-        Maintenant nous fournissons à chaque "element" l'objet reseau              -->
-        <footer-marie
-        v-for="element in reseauSociaux"
-        v-bind:reseau="element"
-        v-bind:key="element.id"
-        ></footer-marie>
-    </ol>
-</div>
-```
+- footer-marie : sera la balise dans l'html qui appelle le component et ses données.
 
 **Fichier js**
 
@@ -220,3 +206,20 @@ Vue.component('footer-marie', {
     }
   })
 ```
+
+**Fichier HTML**
+
+```html
+<div id="footer">
+    <ol>
+        <!--
+        Maintenant nous fournissons à chaque "element" l'objet reseau              -->
+        <footer-marie
+        v-for="element in reseauSociaux"
+        v-bind:reseau="element"
+        v-bind:key="element.id"
+        ></footer-marie>
+    </ol>
+</div>
+```
+
