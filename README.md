@@ -1,10 +1,10 @@
-# vue_apprentissage
+# vue apprentissage
 
 ## Pour commencer
 
-Installer vue CLI : **sudo npm install -g @vue/cli**
-Créer un projet : **vue create my-project**
-Lancer le projet : **npm run serve**
+- Installer vue CLI : **sudo npm install -g @vue/cli**
+- Créer un projet : **vue create my-project**
+- Lancer le projet : **npm run serve**
 
 ## Installer un serveur web
 
