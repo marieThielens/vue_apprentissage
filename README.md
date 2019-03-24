@@ -2,9 +2,7 @@
 
 ## Pour commencer
 
-- Installer vue CLI : **sudo npm install -g @vue/cli**
-- Créer un projet : **vue create my-project**
-- Lancer le projet : **npm run serve**
+Allez sur le site de vue et prenez le cdn
 
 ## Installer un serveur web
 
@@ -21,7 +19,7 @@
 
 ```js
 // La navigation
-var nav = new Vue({ // Instance de vue
+var nav = new Vue({ // Instance de vue, on initialise la vue.
     // Sélecteur
     el: '#nav',
     // Définir les propriétés et leurs donner des valeurs.
@@ -70,10 +68,9 @@ nav.message =  'prout2'
 
 **props:** passer des données aux composants enfants. Comme le titre ou le contenu à afficher par exemple. 
 
-## Une nav
-
-
 ## Un formulaire de recherche
+
+<img src="./images/recherche.png" style="width:50%;">
 
 Normalement il faudrait le faire en Ajax mais pour commencer nous le faisons avec un tableau d'objets.
 
@@ -165,6 +162,8 @@ Le fichier html
 
 ## Components
 
+Une composant est une instance de Vue réutilisables. Un composant permet de créer des nouvelles balises HTML avec un comportement spécifique personnalisé.
+
 **Fichier html**
 ```html
 <div id="footer">
@@ -223,3 +222,82 @@ Vue.component('footer-marie', {
 </div>
 ```
 
+```js
+Vue.component('anchored-heading', {
+  template: '#anchored-heading-template',
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+})
+```
+
+## Propriétés calculées : computed
+
+Ce sont des propriétés qui dépendent de propriété qui sont dans data (dans notre instance).
+Vue fournit une façon plus générique d’observer et de réagir aux changements de données sur une instance de Vue.
+
+Le fichier js
+```js
+var identiteUtilisateur = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Marie',
+    lastName: 'Thielens'
+  },
+  computed: {
+    fullName: function () {
+        // this = var identiteUtilisateur
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+})
+```
+Le fichier html
+
+```html
+<div id="demo">
+    <p>
+        Prénom : {{ firstName}} <br>
+        Nom : {{ lastName }}
+    </p>
+</div>
+```
+
+## Checkbox
+
+Le fichier js
+```js
+let choix = new Vue({
+    el: "#choix",
+    data: {
+        success: false,
+        choixInput: ''
+    },
+    computed: {
+        statutChoix: function () {
+            // this fait référence à let choix
+            // Si success = true alors affiche success sinon affiche erreor
+             return this.success === true ? 'success' : 'error'
+        }
+    }   
+})
+```
+Le fichier html
+
+```html
+    <div id="choix">
+        <input type="checkbox" v-model="success">
+        <input type="text" v-model="choixInput">
+        {{ choixInput }}
+        <div :class="statutChoix">Tu as coché la case</div>
+    </div>
+
+    <style>
+    .success {
+        color: green;
+    }
+    </style>
+```

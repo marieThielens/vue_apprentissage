@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,10 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Vue.JS</h1>
 
     <!-- La navigation -->
+    <h2>La navigation</h2>
     <div id="nav">
         <!-- La navigation a la classe active -->
         <!-- Pour empêcher la page de sauter lorsqu'un lien est cliqué 
@@ -29,6 +31,7 @@
     </div>
 
 <!-- .......................Formulaire de recherche................ -->
+    <h2>Formulaire de recherche</h2>
     <form id="recherche" v-cloak>
         <div class="bar">
             <!-- Create a binding between the searchString model and the text field -->
@@ -44,7 +47,34 @@
     
     </form>
 
-    <footer-marie></footer-marie>
+    <!-- ..................Components....................... -->
+    <h2>Footer</h2>
+    <div id="footer">
+        <footer-marie></footer-marie>
+    </div>
+
+    <!-- ........................Checkbox........................ -->
+    <h2>Choix</h2>
+    <div id="choix">
+        <input type="checkbox" v-model="success">
+        <input type="text" v-model="choixInput">
+        {{ choixInput }}
+        <div :class="statutChoix">Tu as coché la case</div>
+    </div>
+
+    <style>
+    .success {
+        color: green;
+    }
+    </style>
+
+<div id="demo">
+    <p>
+        Prénom : {{ firstName}} <br>
+        Nom : {{ lastName }} <br>
+        Modifier votre nom : <input type="text" v-model="fullName">
+    </p>    
+</div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./index.js"></script>

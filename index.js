@@ -83,3 +83,49 @@ var recherche = new Vue({
         }
     }
 });
+
+// Footer...............
+Vue.component('footer-marie', {
+    template: '<footer>Ceci est le pied de page</footer>'
+});
+
+var monFooter = new Vue({
+    el:'#footer'
+})
+
+
+// Choix ....................
+let choix = new Vue({
+    el: "#choix",
+    data: {
+        success: false,
+        choixInput: ''
+    },
+    computed: {
+        statutChoix: function () {
+            // this fait référence à let choix
+            // Si success = true alors affiche success sinon affiche erreor
+             return this.success === true ? 'success' : 'error'
+        }
+    }   
+})
+// Faire le code que si success à été modifié
+var identiteUtilisateur = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Marie',
+    lastName: 'Thielens'
+  },
+  computed: {
+    fullName: {
+        get: function () {
+            // this = var identiteUtilisateur
+            return this.firstName + ' ' + this.lastName
+        },
+        set: function (value) {
+            console.log(value)
+        }
+
+    }
+  }
+})
