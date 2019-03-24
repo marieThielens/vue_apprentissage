@@ -1,5 +1,7 @@
 # vue apprentissage
 
+Voir le résultat : https://mariethielens.github.io/vue_apprentissage/
+
 ## Pour commencer
 
 Allez sur le site de vue et prenez le cdn
