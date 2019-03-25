@@ -85,14 +85,31 @@ var recherche = new Vue({
 });
 
 // Footer...............
+// Vue.component('footer-marie', {
+//     template: '<footer>Ceci est le pied de page</footer>'
+// });
+
+// var monFooter = new Vue({
+//     el:'#footer'
+// })
+
+// Props ............... 
+
 Vue.component('footer-marie', {
-    template: '<footer>Ceci est le pied de page</footer>'
-});
-
-var monFooter = new Vue({
-    el:'#footer'
-})
-
+    props: ['reseau'],
+    template: '<li>{{ reseau.text }}</li>'
+  })
+  
+  var monFooter = new Vue({
+    el: '#footer',
+    data: {
+      reseauSociaux: [
+        { id: 0, text: 'Linkedin' },
+        { id: 1, text: 'Facebook' },
+        { id: 2, text: 'Twitter' }
+      ]
+    }
+  })
 
 // Choix ....................
 let choix = new Vue({
@@ -123,7 +140,10 @@ var identiteUtilisateur = new Vue({
             return this.firstName + ' ' + this.lastName
         },
         set: function (value) {
-            console.log(value)
+            // console.log(value) = la vlaur de l'input
+            let partie = value.split(' ') // Les parties = la valeur séparé d'un espace
+            this.firstName = partie[0] // Modifier le prénom
+            this.lastName = partie[1] // Modifier le nom
         }
 
     }

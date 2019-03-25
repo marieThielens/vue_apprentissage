@@ -48,9 +48,13 @@
     </form>
 
     <!-- ..................Components....................... -->
-    <h2>Footer</h2>
+    <h2>Footer</h2><br>
     <div id="footer">
-        <footer-marie></footer-marie>
+        <footer-marie
+        v-for="element in reseauSociaux"
+        v-bind:reseau="element"
+        v-bind:key="element.id"
+        ></footer-marie>
     </div>
 
     <!-- ........................Checkbox........................ -->
@@ -62,11 +66,7 @@
         <div :class="statutChoix">Tu as coché la case</div>
     </div>
 
-    <style>
-    .success {
-        color: green;
-    }
-    </style>
+
 
 <div id="demo">
     <p>
@@ -75,6 +75,15 @@
         Modifier votre nom : <input type="text" v-model="fullName">
     </p>    
 </div>
+
+<style>
+    .success {
+        color: green;
+    }
+    #footer li {
+        list-style:none;
+    }
+</style>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="./index.js"></script>

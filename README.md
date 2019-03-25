@@ -13,6 +13,153 @@ Allez sur le site de vue et prenez le cdn
 - Installer notre serveur : **npm install lite-server** (lite server est le nom de notre serveur).
 - Une bonne pratique est dans le fichier package.json rajouter **"start": "lite-server".** Comme ça pour le lancer on a plus qu’à taper **npm start** dans la console pour lancer le serveur.
 
+## Components
+
+Une composant est une instance de Vue réutilisables. Un composant permet de créer des nouvelles balises HTML avec un comportement spécifique personnalisé.
+
+<img src="./images/footer.png">
+
+**Fichier html**
+```html
+<div id="footer">
+    <footer-marie></footer-marie>
+</div>
+```
+
+**Fichier js** 
+```js
+Vue.component('footer-marie', {
+    template: '<footer>Ceci est le pied de page</footer>'
+});
+
+var monFooter = new Vue({
+    el:'#footer'
+})
+```
+
+## Props
+Améliorons notre footer avec des liens vers les reséau sociaux.
+
+- footer-marie : sera la balise dans l'html qui appelle le component et ses données.
+
+**Fichier js**
+
+```js
+Vue.component('footer-marie', {
+    props: ['reseau'],
+    template: '<li>{{ reseau.text }}</li>'
+  })
+  
+  var footer = new Vue({
+    el: '#footer',
+    data: {
+      reseauSociaux: [
+        { id: 0, text: 'Linkedin' },
+        { id: 1, text: 'Facebook' },
+        { id: 2, text: 'Twitter' }
+      ]
+    }
+  })
+```
+- el: la cible
+- data: propriété qui permet de lier les données de vue (javascript) avec l html. Obligatoire. En fait data permet de passer un objet javascript à une instance de Vue
+
+**Fichier HTML**
+
+```html
+<div id="footer">
+    <ol>
+        <!--
+        Maintenant nous fournissons à chaque "element" l'objet reseau              -->
+        <footer-marie
+        v-for="element in reseauSociaux"
+        v-bind:reseau="element"
+        v-bind:key="element.id"
+        ></footer-marie>
+    </ol>
+</div>
+```
+
+```js
+Vue.component('anchored-heading', {
+  template: '#anchored-heading-template',
+  props: {
+    level: {
+      type: Number,
+      required: true
+    }
+  }
+})
+```
+
+## Propriétés calculées : computed
+
+Ce sont des propriétés qui dépendent de propriété qui sont dans data (dans notre instance).
+Vue fournit une façon plus générique d’observer et de réagir aux changements de données sur une instance de Vue.
+
+Le fichier js
+```js
+var identiteUtilisateur = new Vue({
+  el: '#demo',
+  data: {
+    firstName: 'Marie',
+    lastName: 'Thielens'
+  },
+  computed: {
+    fullName: function () {
+        // this = var identiteUtilisateur
+      return this.firstName + ' ' + this.lastName
+    }
+  }
+})
+```
+Le fichier html
+
+```html
+<div id="demo">
+    <p>
+        Prénom : {{ firstName}} <br>
+        Nom : {{ lastName }}
+    </p>
+</div>
+```
+
+## Checkbox
+
+Le fichier js
+```js
+let choix = new Vue({
+    el: "#choix",
+    data: {
+        success: false,
+        choixInput: ''
+    },
+    computed: {
+        statutChoix: function () {
+            // this fait référence à let choix
+            // Si success = true alors affiche success sinon affiche erreor
+             return this.success === true ? 'success' : 'error'
+        }
+    }   
+})
+```
+Le fichier html
+
+```html
+    <div id="choix">
+        <input type="checkbox" v-model="success">
+        <input type="text" v-model="choixInput">
+        {{ choixInput }}
+        <div :class="statutChoix">Tu as coché la case</div>
+    </div>
+
+    <style>
+    .success {
+        color: green;
+    }
+    </style>
+```
+
 ## Exemple : Une nav
 
 <img src="./images/nav.png" style="width:40%;" />
@@ -162,144 +309,4 @@ Le fichier html
 </form>
 ```
 
-## Components
 
-Une composant est une instance de Vue réutilisables. Un composant permet de créer des nouvelles balises HTML avec un comportement spécifique personnalisé.
-
-**Fichier html**
-```html
-<div id="footer">
-    <footer-marie></footer-marie>
-</div>
-```
-
-**Fichier js** 
-```js
-Vue.component('footer-marie', {
-    template: '<footer>Ceci est le pied de page</footer>'
-});
-
-var monFooter = new Vue({
-    el:'#footer'
-})
-```
-
-## Props
-
-- footer-marie : sera la balise dans l'html qui appelle le component et ses données.
-
-**Fichier js**
-
-```js
-Vue.component('footer-marie', {
-    props: ['reseau'],
-    template: '<li>{{ reseau.text }}</li>'
-  })
-  
-  var footer = new Vue({
-    el: '#footer',
-    data: {
-      reseauSociaux: [
-        { id: 0, text: 'Linkedin' },
-        { id: 1, text: 'Facebook' },
-        { id: 2, text: 'Twitter' }
-      ]
-    }
-  })
-```
-
-**Fichier HTML**
-
-```html
-<div id="footer">
-    <ol>
-        <!--
-        Maintenant nous fournissons à chaque "element" l'objet reseau              -->
-        <footer-marie
-        v-for="element in reseauSociaux"
-        v-bind:reseau="element"
-        v-bind:key="element.id"
-        ></footer-marie>
-    </ol>
-</div>
-```
-
-```js
-Vue.component('anchored-heading', {
-  template: '#anchored-heading-template',
-  props: {
-    level: {
-      type: Number,
-      required: true
-    }
-  }
-})
-```
-
-## Propriétés calculées : computed
-
-Ce sont des propriétés qui dépendent de propriété qui sont dans data (dans notre instance).
-Vue fournit une façon plus générique d’observer et de réagir aux changements de données sur une instance de Vue.
-
-Le fichier js
-```js
-var identiteUtilisateur = new Vue({
-  el: '#demo',
-  data: {
-    firstName: 'Marie',
-    lastName: 'Thielens'
-  },
-  computed: {
-    fullName: function () {
-        // this = var identiteUtilisateur
-      return this.firstName + ' ' + this.lastName
-    }
-  }
-})
-```
-Le fichier html
-
-```html
-<div id="demo">
-    <p>
-        Prénom : {{ firstName}} <br>
-        Nom : {{ lastName }}
-    </p>
-</div>
-```
-
-## Checkbox
-
-Le fichier js
-```js
-let choix = new Vue({
-    el: "#choix",
-    data: {
-        success: false,
-        choixInput: ''
-    },
-    computed: {
-        statutChoix: function () {
-            // this fait référence à let choix
-            // Si success = true alors affiche success sinon affiche erreor
-             return this.success === true ? 'success' : 'error'
-        }
-    }   
-})
-```
-Le fichier html
-
-```html
-    <div id="choix">
-        <input type="checkbox" v-model="success">
-        <input type="text" v-model="choixInput">
-        {{ choixInput }}
-        <div :class="statutChoix">Tu as coché la case</div>
-    </div>
-
-    <style>
-    .success {
-        color: green;
-    }
-    </style>
-```
