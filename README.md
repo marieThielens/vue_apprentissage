@@ -8,7 +8,7 @@ Allez sur le site de vue et prenez le cdn
 
 ## Installer un serveur web
 
-- Il faut avoir le package npm. Vérifiez que vous l’avez : **npm —version**
+- Il faut avoir le package npm. Vérifiez que vous l’avez : **npm —version** . Si vous ne l'avez pas installez node..
 - Installez le fichier package.json ( La carte d’identité de l’application) **npm init -y**  . On en a besoin pour pouvoir installer notre serveur.
 - Installer notre serveur : **npm install lite-server** (lite server est le nom de notre serveur).
 - Une bonne pratique est dans le fichier package.json rajouter **"start": "lite-server".** Comme ça pour le lancer on a plus qu’à taper **npm start** dans la console pour lancer le serveur.
@@ -17,14 +17,13 @@ Allez sur le site de vue et prenez le cdn
 
 Une composant est une instance de Vue réutilisables. Un composant permet de créer des nouvelles balises HTML avec un comportement spécifique personnalisé.
 
-<img src="./images/footer.png">
+Lors de la création de composants, il faudra toujours spécifier un nom. Par exemple, la déclaration se fera comme suit :
 
-**Fichier html**
-```html
-<div id="footer">
-    <footer-marie></footer-marie>
-</div>
-```
+`Vue.component('my-component-name', { /* ... */ }`
+
+Par convention mettre le nom du composant en minuscule et qu'il contienne un trait d'union. Cela permet d'éviter les conflits avec les éléments HTML actuels et fururs.
+
+<img src="./images/footer.png">
 
 **Fichier js** 
 ```js
@@ -37,10 +36,23 @@ var monFooter = new Vue({
 })
 ```
 
-## Props
-Améliorons notre footer avec des liens vers les reséau sociaux.
+**Fichier html**
+```html
+<div id="footer">
+    <footer-marie></footer-marie>
+</div>
+```
 
-- footer-marie : sera la balise dans l'html qui appelle le component et ses données.
+## Props
+
+Améliorons notre footer avec des liens vers les reséau sociaux. Les props vont nous permettre de passer des données aux composants enfants.
+Je vais aussi ajouter un petit effet au survol. Mon texte deviendra vert.
+
+<img src="./images/footer2.png"/>
+
+- **footer-marie** : nom de ma vue. Sera la balise dans l'html qui appelle le component et ses données.
+- **el**: la cible. La div qui a comme id footer.
+- **data**: propriété qui permet de lier les données de vue (javascript) avec l html. Obligatoire. En fait data permet de passer un objet javascript à une instance de Vue
 
 **Fichier js**
 
@@ -57,13 +69,11 @@ Vue.component('footer-marie', {
         { id: 0, text: 'Linkedin' },
         { id: 1, text: 'Facebook' },
         { id: 2, text: 'Twitter' }
-      ]
+      ],
+      isActive: true
     }
   })
 ```
-- el: la cible
-- data: propriété qui permet de lier les données de vue (javascript) avec l html. Obligatoire. En fait data permet de passer un objet javascript à une instance de Vue
-
 **Fichier HTML**
 
 ```html
@@ -75,22 +85,24 @@ Vue.component('footer-marie', {
         v-for="element in reseauSociaux"
         v-bind:reseau="element"
         v-bind:key="element.id"
+        v-bind:class="{ success: isActive }"
         ></footer-marie>
     </ol>
 </div>
-```
 
-```js
-Vue.component('anchored-heading', {
-  template: '#anchored-heading-template',
-  props: {
-    level: {
-      type: Number,
-      required: true
+<style>
+    .success:hover {
+        color: green;
+        cursor: pointer;
     }
-  }
-})
+    #footer li {
+        list-style:none;
+    }
+</style>
 ```
+**v-for** : boucler dans le tableau
+**v-bind** : 
+Je passe un objet à v-bind pour permuter les classes automatiquement : `v-bind:class="{ success: isActive }"`
 
 ## Propriétés calculées : computed
 
@@ -126,6 +138,18 @@ Le fichier html
 
 ## Checkbox
 
+### Utiliser v-model sur les composants
+
+Ceci : `<input v-model="searchText">``
+Réalise la même chose que :
+
+```html
+<input
+  v-bind:value="searchText"
+  v-on:input="searchText = $event.target.value"
+>
+```
+
 Le fichier js
 ```js
 let choix = new Vue({
@@ -159,6 +183,7 @@ Le fichier html
     }
     </style>
 ```
+**v-model**
 
 ## Exemple : Une nav
 

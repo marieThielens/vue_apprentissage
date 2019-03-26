@@ -107,7 +107,8 @@ Vue.component('footer-marie', {
         { id: 0, text: 'Linkedin' },
         { id: 1, text: 'Facebook' },
         { id: 2, text: 'Twitter' }
-      ]
+      ],
+      isActive: true
     }
   })
 
