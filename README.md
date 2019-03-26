@@ -140,7 +140,7 @@ Le fichier html
 
 ### Utiliser v-model sur les composants
 
-Ceci : `<input v-model="searchText">``
+Ceci : `<input v-model="searchText">`
 Réalise la même chose que :
 
 ```html
@@ -183,7 +183,7 @@ Le fichier html
     }
     </style>
 ```
-**v-model**
+**v-model** : est essentiellement du sucre syntaxique pour mettre à jour les données lors des évènements de saisie utilisateur sur les champs, ainsi que quelques traitements spéciaux pour certains cas particuliers.
 
 ## Exemple : Une nav
 
